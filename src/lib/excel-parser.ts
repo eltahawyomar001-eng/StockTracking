@@ -203,10 +203,12 @@ export function applyColumnMapping(
             // التحقق بواسطة Zod
             const validation = ImportRowSchema.safeParse(importRow);
             if (!validation.success) {
-                validation.error.errors.forEach((err) => {
+                const zodError = validation.error;
+                const issues = 'issues' in zodError ? zodError.issues : [];
+                issues.forEach((err) => {
                     errors.push({
                         row: rowNumber,
-                        field: err.path.join('.'),
+                        field: Array.isArray(err.path) ? err.path.join('.') : String(err.path),
                         message: `سطر ${rowNumber}: ${err.message}`,
                     });
                 });
