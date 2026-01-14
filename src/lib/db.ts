@@ -1,6 +1,6 @@
 import { PrismaClient } from '@/generated/prisma';
 import { PrismaNeon } from '@prisma/adapter-neon';
-import { Pool } from '@neondatabase/serverless';
+import { neon } from '@neondatabase/serverless';
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -22,10 +22,10 @@ function createPrismaClient(): PrismaClient {
     });
   }
 
-  // Use Neon serverless with Pool (WebSocket) for pooler endpoint
-  const pool = new Pool({ connectionString });
+  // Use Neon HTTP driver (requires non-pooler endpoint)
+  const sql = neon(connectionString);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const adapter = new PrismaNeon(pool as any);
+  const adapter = new PrismaNeon(sql as any);
 
   return new PrismaClient({ adapter });
 }
