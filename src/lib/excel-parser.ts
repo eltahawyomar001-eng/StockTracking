@@ -50,11 +50,14 @@ export function parseExcelFile(buffer: ArrayBuffer): ParsedExcelData {
         }
 
         // أول صف هو العناوين
-        const headers = (jsonData[0] as unknown[]).map((h) => String(h || '').trim());
+        const firstRow = jsonData[0] as unknown;
+        const headers = (Array.isArray(firstRow) ? firstRow : Object.values(firstRow as Record<string, unknown>))
+            .map((h) => String(h || '').trim());
 
         // تحويل باقي الصفوف إلى كائنات
         const rows = jsonData.slice(1).map((row) => {
-            const rowArray = row as unknown[];
+            const rowData = row as unknown;
+            const rowArray = Array.isArray(rowData) ? rowData : Object.values(rowData as Record<string, unknown>);
             const obj: Record<string, unknown> = {};
             headers.forEach((header, index) => {
                 if (header) {
