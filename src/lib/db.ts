@@ -1,10 +1,6 @@
 import { PrismaClient } from '@/generated/prisma';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import ws from 'ws';
-
-// Configure Neon to use WebSocket for connections
-neonConfig.webSocketConstructor = ws;
+import { PrismaNeonHTTP } from '@prisma/adapter-neon';
+import { neon } from '@neondatabase/serverless';
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -26,10 +22,9 @@ function createPrismaClient(): PrismaClient {
     });
   }
 
-  // Use Neon serverless Pool adapter with WebSocket
-  const pool = new Pool({ connectionString });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const adapter = new PrismaNeon(pool as any);
+  // Use Neon HTTP-only adapter (no WebSocket needed)
+  const sql = neon(connectionString);
+  const adapter = new PrismaNeonHTTP(sql);
 
   return new PrismaClient({ adapter });
 }
