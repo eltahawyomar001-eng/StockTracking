@@ -1,12 +1,16 @@
 import { PrismaClient } from '@/generated/prisma';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { neon } from '@neondatabase/serverless';
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
 function createPrismaClient(): PrismaClient {
+  const connectionString = process.env.DATABASE_URL;
+
   // During build time without DATABASE_URL, return a proxy
-  if (!process.env.DATABASE_URL) {
+  if (!connectionString) {
     console.warn('DATABASE_URL not set - database operations will fail');
     return new Proxy({} as PrismaClient, {
       get(_, prop) {
@@ -18,8 +22,11 @@ function createPrismaClient(): PrismaClient {
     });
   }
 
-  // Prisma 7 uses prisma.config.ts for datasource configuration
-  return new PrismaClient();
+  // Use Neon serverless adapter
+  const sql = neon(connectionString);
+  const adapter = new PrismaNeon(sql);
+
+  return new PrismaClient({ adapter });
 }
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient();
