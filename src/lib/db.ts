@@ -7,7 +7,8 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient(): PrismaClient {
-  const connectionString = process.env.DATABASE_URL;
+  // Use DATABASE_URL_DIRECT if set, otherwise fall back to DATABASE_URL
+  const connectionString = process.env.DATABASE_URL_DIRECT || process.env.DATABASE_URL;
 
   // During build time without DATABASE_URL, return a proxy
   if (!connectionString) {
