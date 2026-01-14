@@ -1,0 +1,105 @@
+// Prisma Schema - تطبيق تتبع المخزون
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// الفئة الرئيسية
+model Category {
+  id            String        @id @default(cuid())
+  name          String        @unique
+  description   String?
+  subcategories Subcategory[]
+  items         Item[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+// الفئة الفرعية
+model Subcategory {
+  id          String   @id @default(cuid())
+  name        String
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  items       Item[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([name, categoryId])
+}
+
+// الموقع/القاعة
+model Location {
+  id             String          @id @default(cuid())
+  name           String          @unique
+  description    String?
+  movementsFrom  Movement[]      @relation("FromLocation")
+  movementsTo    Movement[]      @relation("ToLocation")
+  stockSnapshots StockSnapshot[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+// الصنف
+model Item {
+  id             String          @id @default(cuid())
+  code           String          @unique
+  name           String
+  categoryId     String?
+  subcategoryId  String?
+  category       Category?       @relation(fields: [categoryId], references: [id])
+  subcategory    Subcategory?    @relation(fields: [subcategoryId], references: [id])
+  movements      Movement[]
+  stockSnapshots StockSnapshot[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([name])
+  @@index([code])
+}
+
+// أنواع الحركة
+enum MovementType {
+  IN       // وارد
+  OUT      // صادر
+  TRANSFER // تحويل
+}
+
+// حركة المخزون
+model Movement {
+  id             String       @id @default(cuid())
+  date           DateTime
+  type           MovementType
+  quantity       Int
+  itemId         String
+  item           Item         @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  fromLocationId String?
+  fromLocation   Location?    @relation("FromLocation", fields: [fromLocationId], references: [id])
+  toLocationId   String?
+  toLocation     Location?    @relation("ToLocation", fields: [toLocationId], references: [id])
+  note           String?
+  sourceFileName String?
+  sourceRowHash  String?      @unique
+  createdAt      DateTime     @default(now())
+
+  @@index([itemId])
+  @@index([date])
+  @@index([type])
+}
+
+// جدول الأرصدة (للأداء)
+model StockSnapshot {
+  id         String   @id @default(cuid())
+  itemId     String
+  locationId String
+  onHand     Int      @default(0)
+  item       Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  location   Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  updatedAt  DateTime @updatedAt
+
+  @@unique([itemId, locationId])
+}
