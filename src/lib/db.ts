@@ -1,5 +1,5 @@
 import { PrismaClient } from '@/generated/prisma';
-import { PrismaNeonHTTP } from '@prisma/adapter-neon';
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { neon } from '@neondatabase/serverless';
 
 const globalForPrisma = globalThis as unknown as {
@@ -22,9 +22,10 @@ function createPrismaClient(): PrismaClient {
     });
   }
 
-  // Use Neon HTTP-only adapter (no WebSocket needed)
+  // Use Neon serverless with neon() function
   const sql = neon(connectionString);
-  const adapter = new PrismaNeonHTTP(sql);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const adapter = new PrismaNeon(sql as any);
 
   return new PrismaClient({ adapter });
 }
