@@ -7,7 +7,7 @@ export const ImportRowSchema = z.object({
     itemName: z.string().min(1, 'اسم الصنف مطلوب'),
     quantity: z.number().positive('الكمية يجب أن تكون رقم موجب'),
     movementType: z.enum(['IN', 'OUT', 'TRANSFER'], {
-        errorMap: () => ({ message: 'نوع الحركة غير صحيح (وارد/صادر/تحويل)' }),
+        message: 'نوع الحركة غير صحيح (وارد/صادر/تحويل)',
     }),
     fromLocation: z.string().optional(),
     toLocation: z.string().optional(),
