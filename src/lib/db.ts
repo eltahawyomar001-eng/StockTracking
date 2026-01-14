@@ -7,10 +7,8 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient(): PrismaClient {
-  // Use DATABASE_URL_DIRECT if set, otherwise fall back to DATABASE_URL
   const connectionString = process.env.DATABASE_URL_DIRECT || process.env.DATABASE_URL;
 
-  // During build time without DATABASE_URL, return a proxy
   if (!connectionString) {
     console.warn('DATABASE_URL not set - database operations will fail');
     return new Proxy({} as PrismaClient, {
@@ -23,7 +21,6 @@ function createPrismaClient(): PrismaClient {
     });
   }
 
-  // Use Neon HTTP driver (requires non-pooler endpoint)
   const sql = neon(connectionString);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const adapter = new PrismaNeon(sql as any);
