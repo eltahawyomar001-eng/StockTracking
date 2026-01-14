@@ -18,10 +18,8 @@ function createPrismaClient(): PrismaClient {
     });
   }
 
-  // Use direct Prisma connection to Neon (no adapter needed)
-  return new PrismaClient({
-    datasourceUrl: process.env.DATABASE_URL,
-  });
+  // Prisma 7 uses prisma.config.ts for datasource configuration
+  return new PrismaClient();
 }
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient();
