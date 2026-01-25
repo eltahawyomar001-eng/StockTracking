@@ -48,7 +48,7 @@ export async function getItems(params: GetItemsParams = {}) {
     // حساب الرصيد الإجمالي لكل صنف
     const itemsWithTotal = items.map((item: typeof items[0]) => ({
         ...item,
-        totalStock: item.stockSnapshots.reduce((sum, s) => sum + s.onHand, 0),
+        totalStock: item.stockSnapshots.reduce((sum: number, s: { onHand: number }) => sum + s.onHand, 0),
     }));
 
     return {
@@ -85,7 +85,7 @@ export async function getItem(id: string) {
 
     return {
         ...item,
-        totalStock: item.stockSnapshots.reduce((sum, s) => sum + s.onHand, 0),
+        totalStock: item.stockSnapshots.reduce((sum: number, s: { onHand: number }) => sum + s.onHand, 0),
     };
 }
 
