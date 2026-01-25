@@ -1,3 +1,18 @@
+// Mock Database Client - No database connection required
+// This file now exports a mock Prisma client for testing
+// To re-enable database: uncomment the code below and comment out the mock client export
+
+import { mockPrismaClient } from './mock-client';
+
+// Export mock client as default
+const prisma = mockPrismaClient as any;
+
+export default prisma;
+export { prisma };
+
+/* 
+// Original Database Code (commented out)
+import 'dotenv/config';
 import { PrismaClient } from '@/generated/prisma';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import { neon } from '@neondatabase/serverless';
@@ -35,3 +50,5 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default prisma;
+*/
+

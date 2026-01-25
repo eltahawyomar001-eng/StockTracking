@@ -81,15 +81,15 @@ export default function ItemsClient({
         <AppLayout>
             <div className="space-y-6 animate-fade-in-up">
                 <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">الأصناف</h1>
-                    <p className="text-white/60">عرض وإدارة جميع الأصناف في المخزون</p>
+                    <h1 className="text-3xl font-bold text-foreground mb-2">الأصناف</h1>
+                    <p className="text-foreground/60">عرض وإدارة جميع الأصناف في المخزون</p>
                 </div>
 
                 {/* Filters */}
                 <GlassCard className="p-4">
                     <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
                         <div className="flex-1 relative">
-                            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                             <Input
                                 type="text"
                                 placeholder="ابحث بالاسم أو الكود..."
@@ -103,7 +103,7 @@ export default function ItemsClient({
                             <SelectTrigger className="w-full md:w-48 glass-input">
                                 <SelectValue placeholder="جميع الفئات" />
                             </SelectTrigger>
-                            <SelectContent className="glass-card border-white/10">
+                            <SelectContent className="glass-card border-primary/20">
                                 <SelectItem value="all">جميع الفئات</SelectItem>
                                 {categories.map((cat) => (
                                     <SelectItem key={cat.id} value={cat.id}>
@@ -122,9 +122,9 @@ export default function ItemsClient({
                 {/* Items Table */}
                 {items.items.length === 0 ? (
                     <GlassCard className="text-center py-12">
-                        <Package className="w-16 h-16 mx-auto mb-4 text-white/30" />
-                        <h3 className="text-xl text-white/60 mb-2">لا توجد أصناف</h3>
-                        <p className="text-white/40 mb-4">
+                        <Package className="w-16 h-16 mx-auto mb-4 text-foreground/30" />
+                        <h3 className="text-xl text-foreground/60 mb-2">لا توجد أصناف</h3>
+                        <p className="text-muted-foreground mb-4">
                             {search || categoryId ? 'جرب تغيير معايير البحث' : 'ابدأ باستيراد بيانات من Excel'}
                         </p>
                         {!search && !categoryId && (
@@ -142,10 +142,10 @@ export default function ItemsClient({
                                 <table className="w-full">
                                     <thead>
                                         <tr>
-                                            <th className="text-right py-4 px-4 text-white/60 font-medium">كود الصنف</th>
-                                            <th className="text-right py-4 px-4 text-white/60 font-medium">اسم الصنف</th>
-                                            <th className="text-right py-4 px-4 text-white/60 font-medium">الفئة</th>
-                                            <th className="text-right py-4 px-4 text-white/60 font-medium">الرصيد الإجمالي</th>
+                                            <th className="text-right py-4 px-4 text-foreground/60 font-medium">كود الصنف</th>
+                                            <th className="text-right py-4 px-4 text-foreground/60 font-medium">اسم الصنف</th>
+                                            <th className="text-right py-4 px-4 text-foreground/60 font-medium">الفئة</th>
+                                            <th className="text-right py-4 px-4 text-foreground/60 font-medium">الرصيد الإجمالي</th>
                                             <th className="py-4 px-4"></th>
                                         </tr>
                                     </thead>
@@ -157,16 +157,16 @@ export default function ItemsClient({
                                                         {item.code}
                                                     </code>
                                                 </td>
-                                                <td className="py-4 px-4 text-white font-medium">
+                                                <td className="py-4 px-4 text-foreground font-medium">
                                                     {item.name}
                                                 </td>
                                                 <td className="py-4 px-4">
                                                     {item.category ? (
-                                                        <Badge variant="secondary" className="bg-white/10 text-white/80">
+                                                        <Badge variant="secondary" className="bg-primary/10 text-foreground/80">
                                                             {item.category.name}
                                                         </Badge>
                                                     ) : (
-                                                        <span className="text-white/40">-</span>
+                                                        <span className="text-muted-foreground">-</span>
                                                     )}
                                                 </td>
                                                 <td className="py-4 px-4">
@@ -174,7 +174,7 @@ export default function ItemsClient({
                                                             ? 'text-green-400'
                                                             : item.totalStock < 0
                                                                 ? 'text-red-400'
-                                                                : 'text-white/60'
+                                                                : 'text-foreground/60'
                                                         }`}>
                                                         {formatNumberArabic(item.totalStock)}
                                                     </span>
@@ -201,12 +201,12 @@ export default function ItemsClient({
                                     size="sm"
                                     disabled={items.page <= 1 || loading}
                                     onClick={() => fetchItems(items.page - 1)}
-                                    className="text-white/60 hover:text-white"
+                                    className="text-foreground/60 hover:text-foreground"
                                 >
                                     <ChevronRight className="w-4 h-4" />
                                 </Button>
 
-                                <span className="text-white/60 px-4">
+                                <span className="text-foreground/60 px-4">
                                     صفحة {formatNumberArabic(items.page)} من {formatNumberArabic(items.pages)}
                                 </span>
 
@@ -215,7 +215,7 @@ export default function ItemsClient({
                                     size="sm"
                                     disabled={items.page >= items.pages || loading}
                                     onClick={() => fetchItems(items.page + 1)}
-                                    className="text-white/60 hover:text-white"
+                                    className="text-foreground/60 hover:text-foreground"
                                 >
                                     <ChevronLeft className="w-4 h-4" />
                                 </Button>

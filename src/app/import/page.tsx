@@ -214,8 +214,8 @@ export default function ImportPage() {
         <AppLayout>
             <div className="space-y-6 animate-fade-in-up">
                 <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">استيراد بيانات Excel</h1>
-                    <p className="text-white/60">رفع ملف Excel واستيراد حركات المخزون</p>
+                    <h1 className="text-3xl font-bold text-foreground mb-2">استيراد بيانات Excel</h1>
+                    <p className="text-foreground/60">رفع ملف Excel واستيراد حركات المخزون</p>
                 </div>
 
                 {/* Progress Steps */}
@@ -225,10 +225,10 @@ export default function ImportPage() {
                             <div className={`
                 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
                 ${step === s
-                                    ? 'bg-primary text-white'
+                                    ? 'bg-primary text-foreground'
                                     : ['upload', 'mapping', 'preview', 'result'].indexOf(step) > i
-                                        ? 'bg-green-500 text-white'
-                                        : 'bg-white/10 text-white/40'
+                                        ? 'bg-green-500 text-foreground'
+                                        : 'bg-primary/10 text-muted-foreground'
                                 }
               `}>
                                 {['upload', 'mapping', 'preview', 'result'].indexOf(step) > i ? (
@@ -240,7 +240,7 @@ export default function ImportPage() {
                             {i < 3 && (
                                 <div className={`w-12 h-0.5 mx-1 ${['upload', 'mapping', 'preview', 'result'].indexOf(step) > i
                                         ? 'bg-green-500'
-                                        : 'bg-white/10'
+                                        : 'bg-primary/10'
                                     }`} />
                             )}
                         </div>
@@ -251,8 +251,8 @@ export default function ImportPage() {
                 {step === 'upload' && (
                     <GlassCard className="text-center py-12">
                         <FileSpreadsheet className="w-16 h-16 mx-auto mb-4 text-primary" />
-                        <h2 className="text-xl font-semibold text-white mb-2">رفع ملف Excel</h2>
-                        <p className="text-white/60 mb-6">
+                        <h2 className="text-xl font-semibold text-foreground mb-2">رفع ملف Excel</h2>
+                        <p className="text-foreground/60 mb-6">
                             اختر ملف Excel (.xlsx) يحتوي على بيانات حركات المخزون
                         </p>
 
@@ -287,8 +287,8 @@ export default function ImportPage() {
                     <GlassCard>
                         <div className="flex items-center justify-between mb-6">
                             <div>
-                                <h2 className="text-xl font-semibold text-white">تعيين الأعمدة</h2>
-                                <p className="text-white/60 text-sm">
+                                <h2 className="text-xl font-semibold text-foreground">تعيين الأعمدة</h2>
+                                <p className="text-foreground/60 text-sm">
                                     طابق أعمدة الملف مع الحقول المطلوبة
                                 </p>
                             </div>
@@ -297,7 +297,7 @@ export default function ImportPage() {
                                     <SelectTrigger className="w-48 glass-input">
                                         <SelectValue />
                                     </SelectTrigger>
-                                    <SelectContent className="glass-card border-white/10">
+                                    <SelectContent className="glass-card border-primary/20">
                                         {sheets.map((sheet, i) => (
                                             <SelectItem key={i} value={i.toString()}>
                                                 {sheet.name}
@@ -311,7 +311,7 @@ export default function ImportPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             {(Object.keys(FIELD_LABELS) as (keyof ColumnMapping)[]).map((field) => (
                                 <div key={field}>
-                                    <Label className="text-white/80 flex items-center gap-2">
+                                    <Label className="text-foreground/80 flex items-center gap-2">
                                         {FIELD_LABELS[field]}
                                         {REQUIRED_FIELDS.includes(field) && (
                                             <span className="text-red-400 text-xs">مطلوب</span>
@@ -324,7 +324,7 @@ export default function ImportPage() {
                                         <SelectTrigger className="glass-input mt-1">
                                             <SelectValue placeholder="اختر العمود" />
                                         </SelectTrigger>
-                                        <SelectContent className="glass-card border-white/10">
+                                        <SelectContent className="glass-card border-primary/20">
                                             <SelectItem value="none">-- غير محدد --</SelectItem>
                                             {headers.map((header) => (
                                                 <SelectItem key={header} value={header}>
@@ -341,7 +341,7 @@ export default function ImportPage() {
                             <Button
                                 variant="outline"
                                 onClick={handleReset}
-                                className="border-white/20 text-white hover:bg-white/10"
+                                className="border-primary/20 text-foreground hover:bg-primary/10"
                             >
                                 إلغاء
                             </Button>
@@ -367,22 +367,22 @@ export default function ImportPage() {
                         {/* Summary */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <GlassCard className="text-center">
-                                <p className="text-3xl font-bold text-white">
+                                <p className="text-3xl font-bold text-foreground">
                                     {formatNumberArabic(rows.length)}
                                 </p>
-                                <p className="text-white/60">إجمالي الصفوف</p>
+                                <p className="text-foreground/60">إجمالي الصفوف</p>
                             </GlassCard>
                             <GlassCard className="text-center">
                                 <p className="text-3xl font-bold text-green-400">
                                     {formatNumberArabic(validRows.length)}
                                 </p>
-                                <p className="text-white/60">صفوف صالحة</p>
+                                <p className="text-foreground/60">صفوف صالحة</p>
                             </GlassCard>
                             <GlassCard className="text-center">
                                 <p className="text-3xl font-bold text-red-400">
                                     {formatNumberArabic(errors.length)}
                                 </p>
-                                <p className="text-white/60">أخطاء</p>
+                                <p className="text-foreground/60">أخطاء</p>
                             </GlassCard>
                         </div>
 
@@ -391,7 +391,7 @@ export default function ImportPage() {
                             <GlassCard>
                                 <div className="flex items-center gap-2 mb-4">
                                     <AlertCircle className="w-5 h-5 text-red-400" />
-                                    <h3 className="text-lg font-semibold text-white">الأخطاء</h3>
+                                    <h3 className="text-lg font-semibold text-foreground">الأخطاء</h3>
                                 </div>
                                 <ScrollArea className="h-48">
                                     <div className="space-y-2">
@@ -404,7 +404,7 @@ export default function ImportPage() {
                                             </div>
                                         ))}
                                         {errors.length > 50 && (
-                                            <p className="text-white/40 text-sm text-center">
+                                            <p className="text-muted-foreground text-sm text-center">
                                                 ... و {errors.length - 50} خطأ آخر
                                             </p>
                                         )}
@@ -416,28 +416,28 @@ export default function ImportPage() {
                         {/* Preview Table */}
                         {validRows.length > 0 && (
                             <GlassCard>
-                                <h3 className="text-lg font-semibold text-white mb-4">
+                                <h3 className="text-lg font-semibold text-foreground mb-4">
                                     معاينة البيانات (أول 20 صف)
                                 </h3>
                                 <div className="overflow-x-auto">
                                     <table className="w-full text-sm">
                                         <thead>
-                                            <tr className="border-b border-white/10">
-                                                <th className="text-right py-2 px-3 text-white/60">#</th>
-                                                <th className="text-right py-2 px-3 text-white/60">التاريخ</th>
-                                                <th className="text-right py-2 px-3 text-white/60">الكود</th>
-                                                <th className="text-right py-2 px-3 text-white/60">الصنف</th>
-                                                <th className="text-right py-2 px-3 text-white/60">النوع</th>
-                                                <th className="text-right py-2 px-3 text-white/60">الكمية</th>
-                                                <th className="text-right py-2 px-3 text-white/60">من</th>
-                                                <th className="text-right py-2 px-3 text-white/60">إلى</th>
+                                            <tr className="border-b border-primary/20">
+                                                <th className="text-right py-2 px-3 text-foreground/60">#</th>
+                                                <th className="text-right py-2 px-3 text-foreground/60">التاريخ</th>
+                                                <th className="text-right py-2 px-3 text-foreground/60">الكود</th>
+                                                <th className="text-right py-2 px-3 text-foreground/60">الصنف</th>
+                                                <th className="text-right py-2 px-3 text-foreground/60">النوع</th>
+                                                <th className="text-right py-2 px-3 text-foreground/60">الكمية</th>
+                                                <th className="text-right py-2 px-3 text-foreground/60">من</th>
+                                                <th className="text-right py-2 px-3 text-foreground/60">إلى</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {validRows.slice(0, 20).map((row) => (
                                                 <tr key={row.rowNumber} className="border-b border-white/5">
-                                                    <td className="py-2 px-3 text-white/40">{row.rowNumber}</td>
-                                                    <td className="py-2 px-3 text-white/80">
+                                                    <td className="py-2 px-3 text-muted-foreground">{row.rowNumber}</td>
+                                                    <td className="py-2 px-3 text-foreground/80">
                                                         {new Date(row.data.date).toLocaleDateString('ar-EG')}
                                                     </td>
                                                     <td className="py-2 px-3">
@@ -445,7 +445,7 @@ export default function ImportPage() {
                                                             {row.data.itemCode}
                                                         </code>
                                                     </td>
-                                                    <td className="py-2 px-3 text-white">{row.data.itemName}</td>
+                                                    <td className="py-2 px-3 text-foreground">{row.data.itemName}</td>
                                                     <td className="py-2 px-3">
                                                         <Badge className={
                                                             row.data.movementType === 'IN'
@@ -457,13 +457,13 @@ export default function ImportPage() {
                                                             {movementTypeToArabic(row.data.movementType)}
                                                         </Badge>
                                                     </td>
-                                                    <td className="py-2 px-3 text-white font-medium">
+                                                    <td className="py-2 px-3 text-foreground font-medium">
                                                         {formatNumberArabic(row.data.quantity)}
                                                     </td>
-                                                    <td className="py-2 px-3 text-white/60">
+                                                    <td className="py-2 px-3 text-foreground/60">
                                                         {row.data.fromLocation || '-'}
                                                     </td>
-                                                    <td className="py-2 px-3 text-white/60">
+                                                    <td className="py-2 px-3 text-foreground/60">
                                                         {row.data.toLocation || '-'}
                                                     </td>
                                                 </tr>
@@ -479,7 +479,7 @@ export default function ImportPage() {
                             <Button
                                 variant="outline"
                                 onClick={() => setStep('mapping')}
-                                className="border-white/20 text-white hover:bg-white/10"
+                                className="border-primary/20 text-foreground hover:bg-primary/10"
                             >
                                 <ChevronRight className="w-4 h-4 ml-2" />
                                 السابق
@@ -506,27 +506,27 @@ export default function ImportPage() {
                         <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
                             <Check className="w-8 h-8 text-green-400" />
                         </div>
-                        <h2 className="text-2xl font-bold text-white mb-2">تم الاستيراد بنجاح</h2>
-                        <p className="text-white/60 mb-6">تمت معالجة البيانات وحفظها في قاعدة البيانات</p>
+                        <h2 className="text-2xl font-bold text-foreground mb-2">تم الاستيراد بنجاح</h2>
+                        <p className="text-foreground/60 mb-6">تمت معالجة البيانات وحفظها في قاعدة البيانات</p>
 
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
                             <div className="glass-card-light rounded-xl p-4">
                                 <p className="text-2xl font-bold text-primary">
                                     {formatNumberArabic(importResult.itemsCreated)}
                                 </p>
-                                <p className="text-white/60 text-sm">أصناف جديدة</p>
+                                <p className="text-foreground/60 text-sm">أصناف جديدة</p>
                             </div>
                             <div className="glass-card-light rounded-xl p-4">
                                 <p className="text-2xl font-bold text-green-400">
                                     {formatNumberArabic(importResult.movementsCreated)}
                                 </p>
-                                <p className="text-white/60 text-sm">حركة تم إنشاؤها</p>
+                                <p className="text-foreground/60 text-sm">حركة تم إنشاؤها</p>
                             </div>
                             <div className="glass-card-light rounded-xl p-4">
                                 <p className="text-2xl font-bold text-red-400">
                                     {formatNumberArabic(importResult.errors.length)}
                                 </p>
-                                <p className="text-white/60 text-sm">أخطاء</p>
+                                <p className="text-foreground/60 text-sm">أخطاء</p>
                             </div>
                         </div>
 
@@ -551,7 +551,7 @@ export default function ImportPage() {
                             <Button
                                 variant="outline"
                                 onClick={handleReset}
-                                className="border-white/20 text-white hover:bg-white/10"
+                                className="border-primary/20 text-foreground hover:bg-primary/10"
                             >
                                 استيراد ملف آخر
                             </Button>

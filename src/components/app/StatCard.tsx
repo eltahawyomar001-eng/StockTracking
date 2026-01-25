@@ -28,10 +28,10 @@ export function StatCard({
         )}>
             <div className="flex items-start justify-between">
                 <div className="flex-1">
-                    <p className="text-white/60 text-sm font-medium mb-1">{title}</p>
-                    <p className="text-3xl font-bold text-white">{value}</p>
+                    <p className="text-foreground/60 text-sm font-medium mb-1">{title}</p>
+                    <p className="text-3xl font-bold text-foreground">{value}</p>
                     {subtitle && (
-                        <p className="text-white/40 text-sm mt-1">{subtitle}</p>
+                        <p className="text-muted-foreground text-sm mt-1">{subtitle}</p>
                     )}
                     {trend && (
                         <div className={cn(
@@ -39,7 +39,7 @@ export function StatCard({
                             trend.isPositive ? "text-green-400" : "text-red-400"
                         )}>
                             <span>{trend.isPositive ? '+' : ''}{trend.value}%</span>
-                            <span className="text-white/40">من الشهر الماضي</span>
+                            <span className="text-muted-foreground">من الشهر الماضي</span>
                         </div>
                     )}
                 </div>

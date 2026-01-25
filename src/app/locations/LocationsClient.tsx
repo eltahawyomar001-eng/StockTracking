@@ -89,8 +89,8 @@ export default function LocationsClient({ initialLocations }: LocationsClientPro
             <div className="space-y-6 animate-fade-in-up">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-white mb-2">المواقع</h1>
-                        <p className="text-white/60">إدارة المخازن والقاعات</p>
+                        <h1 className="text-3xl font-bold text-foreground mb-2">المواقع</h1>
+                        <p className="text-foreground/60">إدارة المخازن والقاعات</p>
                     </div>
 
                     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -103,15 +103,15 @@ export default function LocationsClient({ initialLocations }: LocationsClientPro
                                 إضافة موقع
                             </Button>
                         </DialogTrigger>
-                        <DialogContent className="glass-card border-white/10">
+                        <DialogContent className="glass-card border-primary/20">
                             <DialogHeader>
-                                <DialogTitle className="text-white">
+                                <DialogTitle className="text-foreground">
                                     {editingLocation ? 'تعديل الموقع' : 'إضافة موقع جديد'}
                                 </DialogTitle>
                             </DialogHeader>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <Label className="text-white/80">اسم الموقع</Label>
+                                    <Label className="text-foreground/80">اسم الموقع</Label>
                                     <Input
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -121,7 +121,7 @@ export default function LocationsClient({ initialLocations }: LocationsClientPro
                                     />
                                 </div>
                                 <div>
-                                    <Label className="text-white/80">الوصف (اختياري)</Label>
+                                    <Label className="text-foreground/80">الوصف (اختياري)</Label>
                                     <Textarea
                                         value={formData.description}
                                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -135,7 +135,7 @@ export default function LocationsClient({ initialLocations }: LocationsClientPro
                                         type="button"
                                         variant="outline"
                                         onClick={() => setDialogOpen(false)}
-                                        className="border-white/20 text-white hover:bg-white/10"
+                                        className="border-primary/20 text-foreground hover:bg-primary/10"
                                     >
                                         إلغاء
                                     </Button>
@@ -151,9 +151,9 @@ export default function LocationsClient({ initialLocations }: LocationsClientPro
                 {/* Locations Grid */}
                 {locations.length === 0 ? (
                     <GlassCard className="text-center py-12">
-                        <MapPin className="w-16 h-16 mx-auto mb-4 text-white/30" />
-                        <h3 className="text-xl text-white/60 mb-2">لا توجد مواقع</h3>
-                        <p className="text-white/40">ابدأ بإضافة موقع جديد</p>
+                        <MapPin className="w-16 h-16 mx-auto mb-4 text-foreground/30" />
+                        <h3 className="text-xl text-foreground/60 mb-2">لا توجد مواقع</h3>
+                        <p className="text-muted-foreground">ابدأ بإضافة موقع جديد</p>
                     </GlassCard>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -168,7 +168,7 @@ export default function LocationsClient({ initialLocations }: LocationsClientPro
                                             size="sm"
                                             variant="ghost"
                                             onClick={() => handleOpenDialog(location)}
-                                            className="text-white/60 hover:text-white hover:bg-white/10 h-8 w-8 p-0"
+                                            className="text-foreground/60 hover:text-foreground hover:bg-primary/10 h-8 w-8 p-0"
                                         >
                                             <Pencil className="w-4 h-4" />
                                         </Button>
@@ -182,11 +182,11 @@ export default function LocationsClient({ initialLocations }: LocationsClientPro
                                         </Button>
                                     </div>
                                 </div>
-                                <h3 className="text-lg font-medium text-white mb-1">{location.name}</h3>
+                                <h3 className="text-lg font-medium text-foreground mb-1">{location.name}</h3>
                                 {location.description && (
-                                    <p className="text-white/50 text-sm mb-2">{location.description}</p>
+                                    <p className="text-foreground/50 text-sm mb-2">{location.description}</p>
                                 )}
-                                <p className="text-white/40 text-sm">
+                                <p className="text-muted-foreground text-sm">
                                     {location._count.stockSnapshots} صنف في هذا الموقع
                                 </p>
                             </GlassCard>

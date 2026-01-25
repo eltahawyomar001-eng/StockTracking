@@ -11,6 +11,7 @@ import {
     X
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SarayLogo } from './SarayLogo';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -33,7 +34,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             {/* Overlay للموبايل */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+                    className="fixed inset-0 bg-black/20 z-40 lg:hidden"
                     onClick={onClose}
                 />
             )}
@@ -47,13 +48,13 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 )}
             >
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-white/10">
-                    <h1 className="text-xl font-bold text-white">تتبع المخزون</h1>
+                <div className="flex items-center justify-between p-6 border-b border-primary/20">
+                    <SarayLogo className="h-12 w-auto" />
                     <button
                         onClick={onClose}
-                        className="lg:hidden p-2 hover:bg-white/10 rounded-xl transition-colors"
+                        className="lg:hidden p-2 hover:bg-primary/10 rounded-xl transition-colors"
                     >
-                        <X className="w-5 h-5" />
+                        <X className="w-5 h-5 text-foreground" />
                     </button>
                 </div>
 
@@ -70,10 +71,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                                 onClick={onClose}
                                 className={cn(
                                     "flex items-center gap-3 px-4 py-3 rounded-xl transition-all",
-                                    "hover:bg-white/10",
+                                    "hover:bg-primary/10",
                                     isActive
-                                        ? "bg-primary/20 text-primary border border-primary/30"
-                                        : "text-white/70 hover:text-white"
+                                        ? "bg-primary/15 text-primary border border-primary/30"
+                                        : "text-foreground/70 hover:text-foreground"
                                 )}
                             >
                                 <item.icon className="w-5 h-5" />
@@ -84,9 +85,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </nav>
 
                 {/* Footer */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
-                    <p className="text-xs text-white/40 text-center">
-                        نظام إدارة المخزون v1.0
+                <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-primary/20">
+                    <p className="text-xs text-muted-foreground text-center">
+                        نظام سراي v1.0
                     </p>
                 </div>
             </aside>

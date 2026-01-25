@@ -136,8 +136,8 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
             <div className="space-y-6 animate-fade-in-up">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-white mb-2">الفئات</h1>
-                        <p className="text-white/60">إدارة فئات الأصناف والتصنيفات الفرعية</p>
+                        <h1 className="text-3xl font-bold text-foreground mb-2">الفئات</h1>
+                        <p className="text-foreground/60">إدارة فئات الأصناف والتصنيفات الفرعية</p>
                     </div>
 
                     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -150,15 +150,15 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                 إضافة فئة
                             </Button>
                         </DialogTrigger>
-                        <DialogContent className="glass-card border-white/10">
+                        <DialogContent className="glass-card border-primary/20">
                             <DialogHeader>
-                                <DialogTitle className="text-white">
+                                <DialogTitle className="text-foreground">
                                     {editingCategory ? 'تعديل الفئة' : 'إضافة فئة جديدة'}
                                 </DialogTitle>
                             </DialogHeader>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div>
-                                    <Label className="text-white/80">اسم الفئة</Label>
+                                    <Label className="text-foreground/80">اسم الفئة</Label>
                                     <Input
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -168,7 +168,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                     />
                                 </div>
                                 <div>
-                                    <Label className="text-white/80">الوصف (اختياري)</Label>
+                                    <Label className="text-foreground/80">الوصف (اختياري)</Label>
                                     <Textarea
                                         value={formData.description}
                                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -182,7 +182,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                         type="button"
                                         variant="outline"
                                         onClick={() => setDialogOpen(false)}
-                                        className="border-white/20 text-white hover:bg-white/10"
+                                        className="border-primary/20 text-foreground hover:bg-primary/10"
                                     >
                                         إلغاء
                                     </Button>
@@ -197,13 +197,13 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
 
                 {/* Subcategory Dialog */}
                 <Dialog open={subcategoryDialogOpen} onOpenChange={setSubcategoryDialogOpen}>
-                    <DialogContent className="glass-card border-white/10">
+                    <DialogContent className="glass-card border-primary/20">
                         <DialogHeader>
-                            <DialogTitle className="text-white">إضافة فئة فرعية</DialogTitle>
+                            <DialogTitle className="text-foreground">إضافة فئة فرعية</DialogTitle>
                         </DialogHeader>
                         <form onSubmit={handleAddSubcategory} className="space-y-4">
                             <div>
-                                <Label className="text-white/80">اسم الفئة الفرعية</Label>
+                                <Label className="text-foreground/80">اسم الفئة الفرعية</Label>
                                 <Input
                                     value={subcategoryName}
                                     onChange={(e) => setSubcategoryName(e.target.value)}
@@ -217,7 +217,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                     type="button"
                                     variant="outline"
                                     onClick={() => setSubcategoryDialogOpen(false)}
-                                    className="border-white/20 text-white hover:bg-white/10"
+                                    className="border-primary/20 text-foreground hover:bg-primary/10"
                                 >
                                     إلغاء
                                 </Button>
@@ -232,9 +232,9 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                 {/* Categories List */}
                 {categories.length === 0 ? (
                     <GlassCard className="text-center py-12">
-                        <FolderTree className="w-16 h-16 mx-auto mb-4 text-white/30" />
-                        <h3 className="text-xl text-white/60 mb-2">لا توجد فئات</h3>
-                        <p className="text-white/40">ابدأ بإضافة فئة جديدة</p>
+                        <FolderTree className="w-16 h-16 mx-auto mb-4 text-foreground/30" />
+                        <h3 className="text-xl text-foreground/60 mb-2">لا توجد فئات</h3>
+                        <p className="text-muted-foreground">ابدأ بإضافة فئة جديدة</p>
                     </GlassCard>
                 ) : (
                     <div className="space-y-3">
@@ -244,17 +244,17 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                     <div className="flex items-center gap-3">
                                         <button
                                             onClick={() => toggleExpand(category.id)}
-                                            className="p-1 hover:bg-white/10 rounded-lg transition-colors"
+                                            className="p-1 hover:bg-primary/10 rounded-lg transition-colors"
                                         >
                                             {expandedCategories.has(category.id) ? (
-                                                <ChevronDown className="w-5 h-5 text-white/60" />
+                                                <ChevronDown className="w-5 h-5 text-foreground/60" />
                                             ) : (
-                                                <ChevronLeft className="w-5 h-5 text-white/60" />
+                                                <ChevronLeft className="w-5 h-5 text-foreground/60" />
                                             )}
                                         </button>
                                         <div>
-                                            <h3 className="text-lg font-medium text-white">{category.name}</h3>
-                                            <p className="text-sm text-white/50">
+                                            <h3 className="text-lg font-medium text-foreground">{category.name}</h3>
+                                            <p className="text-sm text-foreground/50">
                                                 {category._count.items} صنف • {category.subcategories.length} فئة فرعية
                                             </p>
                                         </div>
@@ -268,7 +268,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                                 setSelectedCategoryId(category.id);
                                                 setSubcategoryDialogOpen(true);
                                             }}
-                                            className="text-white/60 hover:text-white hover:bg-white/10"
+                                            className="text-foreground/60 hover:text-foreground hover:bg-primary/10"
                                         >
                                             <Plus className="w-4 h-4" />
                                         </Button>
@@ -276,7 +276,7 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                             size="sm"
                                             variant="ghost"
                                             onClick={() => handleOpenDialog(category)}
-                                            className="text-white/60 hover:text-white hover:bg-white/10"
+                                            className="text-foreground/60 hover:text-foreground hover:bg-primary/10"
                                         >
                                             <Pencil className="w-4 h-4" />
                                         </Button>
@@ -292,14 +292,14 @@ export default function CategoriesClient({ initialCategories }: CategoriesClient
                                 </div>
 
                                 {expandedCategories.has(category.id) && category.subcategories.length > 0 && (
-                                    <div className="border-t border-white/10 bg-white/5 p-4">
+                                    <div className="border-t border-primary/20 bg-white/5 p-4">
                                         <div className="space-y-2">
                                             {category.subcategories.map((sub) => (
                                                 <div
                                                     key={sub.id}
                                                     className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-white/5"
                                                 >
-                                                    <span className="text-white/80">{sub.name}</span>
+                                                    <span className="text-foreground/80">{sub.name}</span>
                                                     <Button
                                                         size="sm"
                                                         variant="ghost"

@@ -26,12 +26,12 @@ export default async function ItemDetailPage({ params }: PageProps) {
         <AppLayout>
             <div className="space-y-6 animate-fade-in-up">
                 {/* Breadcrumb */}
-                <div className="flex items-center gap-2 text-white/60">
-                    <Link href="/items" className="hover:text-white transition-colors">
+                <div className="flex items-center gap-2 text-foreground/60">
+                    <Link href="/items" className="hover:text-foreground transition-colors">
                         الأصناف
                     </Link>
                     <ArrowRight className="w-4 h-4 rotate-180" />
-                    <span className="text-white">{item.name}</span>
+                    <span className="text-foreground">{item.name}</span>
                 </div>
 
                 {/* Header */}
@@ -42,7 +42,7 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                 <Package className="w-6 h-6 text-primary" />
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold text-white">{item.name}</h1>
+                                <h1 className="text-2xl font-bold text-foreground">{item.name}</h1>
                                 <code className="text-primary bg-primary/10 px-2 py-1 rounded text-sm">
                                     {item.code}
                                 </code>
@@ -50,7 +50,7 @@ export default async function ItemDetailPage({ params }: PageProps) {
                         </div>
                         <div className="flex items-center gap-2 mt-3">
                             {item.category && (
-                                <Badge variant="secondary" className="bg-white/10">
+                                <Badge variant="secondary" className="bg-primary/10">
                                     {item.category.name}
                                 </Badge>
                             )}
@@ -63,12 +63,12 @@ export default async function ItemDetailPage({ params }: PageProps) {
                     </div>
 
                     <GlassCard className="text-center px-8 py-4">
-                        <p className="text-white/60 text-sm mb-1">الرصيد الإجمالي</p>
+                        <p className="text-foreground/60 text-sm mb-1">الرصيد الإجمالي</p>
                         <p className={`text-4xl font-bold ${item.totalStock > 0
                                 ? 'text-green-400'
                                 : item.totalStock < 0
                                     ? 'text-red-400'
-                                    : 'text-white/60'
+                                    : 'text-foreground/60'
                             }`}>
                             {formatNumberArabic(item.totalStock)}
                         </p>
@@ -97,10 +97,10 @@ export default async function ItemDetailPage({ params }: PageProps) {
                     {/* Stock by Location */}
                     <TabsContent value="stock">
                         <GlassCard>
-                            <h3 className="text-lg font-semibold text-white mb-4">الرصيد حسب الموقع</h3>
+                            <h3 className="text-lg font-semibold text-foreground mb-4">الرصيد حسب الموقع</h3>
 
                             {item.stockSnapshots.length === 0 ? (
-                                <div className="text-center py-8 text-white/50">
+                                <div className="text-center py-8 text-foreground/50">
                                     <MapPin className="w-12 h-12 mx-auto mb-3 opacity-50" />
                                     <p>لا يوجد رصيد في أي موقع</p>
                                 </div>
@@ -109,13 +109,13 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                     {item.stockSnapshots.map((snapshot) => (
                                         <div
                                             key={snapshot.id}
-                                            className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+                                            className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-primary/10 transition-colors"
                                         >
                                             <div className="flex items-center gap-3">
                                                 <div className="p-2 rounded-lg bg-accent/20">
                                                     <MapPin className="w-5 h-5 text-accent" />
                                                 </div>
-                                                <span className="text-white font-medium">
+                                                <span className="text-foreground font-medium">
                                                     {snapshot.location.name}
                                                 </span>
                                             </div>
@@ -123,7 +123,7 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                                     ? 'text-green-400'
                                                     : snapshot.onHand < 0
                                                         ? 'text-red-400'
-                                                        : 'text-white/60'
+                                                        : 'text-foreground/60'
                                                 }`}>
                                                 {formatNumberArabic(snapshot.onHand)}
                                             </span>
@@ -137,10 +137,10 @@ export default async function ItemDetailPage({ params }: PageProps) {
                     {/* Movements History */}
                     <TabsContent value="movements">
                         <GlassCard>
-                            <h3 className="text-lg font-semibold text-white mb-4">سجل الحركات</h3>
+                            <h3 className="text-lg font-semibold text-foreground mb-4">سجل الحركات</h3>
 
                             {item.movements.length === 0 ? (
-                                <div className="text-center py-8 text-white/50">
+                                <div className="text-center py-8 text-foreground/50">
                                     <ArrowRightLeft className="w-12 h-12 mx-auto mb-3 opacity-50" />
                                     <p>لا توجد حركات مسجلة</p>
                                 </div>
@@ -148,13 +148,13 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead>
-                                            <tr className="border-b border-white/10">
-                                                <th className="text-right py-3 px-4 text-white/60 font-medium">التاريخ</th>
-                                                <th className="text-right py-3 px-4 text-white/60 font-medium">النوع</th>
-                                                <th className="text-right py-3 px-4 text-white/60 font-medium">الكمية</th>
-                                                <th className="text-right py-3 px-4 text-white/60 font-medium">من</th>
-                                                <th className="text-right py-3 px-4 text-white/60 font-medium">إلى</th>
-                                                <th className="text-right py-3 px-4 text-white/60 font-medium">ملاحظات</th>
+                                            <tr className="border-b border-primary/20">
+                                                <th className="text-right py-3 px-4 text-foreground/60 font-medium">التاريخ</th>
+                                                <th className="text-right py-3 px-4 text-foreground/60 font-medium">النوع</th>
+                                                <th className="text-right py-3 px-4 text-foreground/60 font-medium">الكمية</th>
+                                                <th className="text-right py-3 px-4 text-foreground/60 font-medium">من</th>
+                                                <th className="text-right py-3 px-4 text-foreground/60 font-medium">إلى</th>
+                                                <th className="text-right py-3 px-4 text-foreground/60 font-medium">ملاحظات</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -163,7 +163,7 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                                     key={movement.id}
                                                     className="border-b border-white/5 hover:bg-white/5 transition-colors"
                                                 >
-                                                    <td className="py-3 px-4 text-white/80">
+                                                    <td className="py-3 px-4 text-foreground/80">
                                                         {formatDateArabic(movement.date)}
                                                     </td>
                                                     <td className="py-3 px-4">
@@ -179,16 +179,16 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                                             {movementTypeToArabic(movement.type)}
                                                         </Badge>
                                                     </td>
-                                                    <td className="py-3 px-4 text-white font-medium">
+                                                    <td className="py-3 px-4 text-foreground font-medium">
                                                         {formatNumberArabic(movement.quantity)}
                                                     </td>
-                                                    <td className="py-3 px-4 text-white/60">
+                                                    <td className="py-3 px-4 text-foreground/60">
                                                         {movement.fromLocation?.name || '-'}
                                                     </td>
-                                                    <td className="py-3 px-4 text-white/60">
+                                                    <td className="py-3 px-4 text-foreground/60">
                                                         {movement.toLocation?.name || '-'}
                                                     </td>
-                                                    <td className="py-3 px-4 text-white/50 text-sm max-w-xs truncate">
+                                                    <td className="py-3 px-4 text-foreground/50 text-sm max-w-xs truncate">
                                                         {movement.note || '-'}
                                                     </td>
                                                 </tr>
@@ -204,7 +204,7 @@ export default async function ItemDetailPage({ params }: PageProps) {
                 {/* Back Button */}
                 <div>
                     <Link href="/items">
-                        <Button variant="ghost" className="text-white/60 hover:text-white">
+                        <Button variant="ghost" className="text-foreground/60 hover:text-foreground">
                             <ArrowRight className="w-4 h-4 ml-2" />
                             العودة للأصناف
                         </Button>

@@ -26,8 +26,8 @@ export default async function DashboardPage() {
       <div className="space-y-6 animate-fade-in-up">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">لوحة التحكم</h1>
-          <p className="text-white/60">نظرة عامة على حالة المخزون</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">لوحة التحكم</h1>
+          <p className="text-foreground/60">نظرة عامة على حالة المخزون</p>
         </div>
 
         {/* Stats Grid */}
@@ -57,7 +57,7 @@ export default async function DashboardPage() {
         {/* Recent Movements */}
         <GlassCard>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-white">أحدث الحركات</h2>
+            <h2 className="text-xl font-semibold text-foreground">أحدث الحركات</h2>
             <Link
               href="/items"
               className="text-primary hover:text-primary/80 text-sm transition-colors"
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
           </div>
 
           {stats.recentMovements.length === 0 ? (
-            <div className="text-center py-8 text-white/50">
+            <div className="text-center py-8 text-foreground/50">
               <ArrowRightLeft className="w-12 h-12 mx-auto mb-3 opacity-50" />
               <p>لا توجد حركات بعد</p>
               <Link
@@ -81,12 +81,12 @@ export default async function DashboardPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-right py-3 px-4 text-white/60 font-medium">التاريخ</th>
-                    <th className="text-right py-3 px-4 text-white/60 font-medium">الصنف</th>
-                    <th className="text-right py-3 px-4 text-white/60 font-medium">النوع</th>
-                    <th className="text-right py-3 px-4 text-white/60 font-medium">الكمية</th>
-                    <th className="text-right py-3 px-4 text-white/60 font-medium">من/إلى</th>
+                  <tr className="border-b border-primary/20">
+                    <th className="text-right py-3 px-4 text-foreground/60 font-medium">التاريخ</th>
+                    <th className="text-right py-3 px-4 text-foreground/60 font-medium">الصنف</th>
+                    <th className="text-right py-3 px-4 text-foreground/60 font-medium">النوع</th>
+                    <th className="text-right py-3 px-4 text-foreground/60 font-medium">الكمية</th>
+                    <th className="text-right py-3 px-4 text-foreground/60 font-medium">من/إلى</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -95,13 +95,13 @@ export default async function DashboardPage() {
                       key={movement.id}
                       className="border-b border-white/5 hover:bg-white/5 transition-colors"
                     >
-                      <td className="py-3 px-4 text-white/80">
+                      <td className="py-3 px-4 text-foreground/80">
                         {formatDateArabic(movement.date)}
                       </td>
                       <td className="py-3 px-4">
                         <Link
                           href={`/items/${movement.item.id}`}
-                          className="text-white hover:text-primary transition-colors"
+                          className="text-foreground hover:text-primary transition-colors"
                         >
                           {movement.item.name}
                         </Link>
@@ -119,10 +119,10 @@ export default async function DashboardPage() {
                           {movementTypeToArabic(movement.type)}
                         </Badge>
                       </td>
-                      <td className="py-3 px-4 text-white font-medium">
+                      <td className="py-3 px-4 text-foreground font-medium">
                         {formatNumberArabic(movement.quantity)}
                       </td>
-                      <td className="py-3 px-4 text-white/60 text-sm">
+                      <td className="py-3 px-4 text-foreground/60 text-sm">
                         {movement.type === 'TRANSFER' ? (
                           <>
                             {movement.fromLocation?.name}
@@ -150,8 +150,8 @@ export default async function DashboardPage() {
               <div className="p-3 rounded-xl bg-primary/20 w-fit mx-auto mb-3">
                 <Package className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-white font-medium mb-1">استيراد بيانات</h3>
-              <p className="text-white/50 text-sm">رفع ملف Excel</p>
+              <h3 className="text-foreground font-medium mb-1">استيراد بيانات</h3>
+              <p className="text-foreground/50 text-sm">رفع ملف Excel</p>
             </GlassCard>
           </Link>
 
@@ -160,8 +160,8 @@ export default async function DashboardPage() {
               <div className="p-3 rounded-xl bg-accent/20 w-fit mx-auto mb-3">
                 <Package className="w-6 h-6 text-accent" />
               </div>
-              <h3 className="text-white font-medium mb-1">الأصناف</h3>
-              <p className="text-white/50 text-sm">عرض وإدارة الأصناف</p>
+              <h3 className="text-foreground font-medium mb-1">الأصناف</h3>
+              <p className="text-foreground/50 text-sm">عرض وإدارة الأصناف</p>
             </GlassCard>
           </Link>
 
@@ -170,8 +170,8 @@ export default async function DashboardPage() {
               <div className="p-3 rounded-xl bg-chart-3/20 w-fit mx-auto mb-3">
                 <MapPin className="w-6 h-6 text-chart-3" />
               </div>
-              <h3 className="text-white font-medium mb-1">الفئات</h3>
-              <p className="text-white/50 text-sm">إدارة التصنيفات</p>
+              <h3 className="text-foreground font-medium mb-1">الفئات</h3>
+              <p className="text-foreground/50 text-sm">إدارة التصنيفات</p>
             </GlassCard>
           </Link>
         </div>
