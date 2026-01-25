@@ -135,7 +135,7 @@ export async function importExcelData(
             }
 
             // إنشاء الحركة مع تحديث الرصيد
-            await prisma.$transaction(async (tx) => {
+            await prisma.$transaction(async (tx: typeof prisma) => {
                 // التحقق من الرصيد
                 if (data.movementType === 'OUT' || data.movementType === 'TRANSFER') {
                     if (!fromLocationId) throw new Error('موقع المصدر مطلوب');
@@ -198,7 +198,7 @@ export async function importExcelData(
 
 // تحديث الرصيد داخل المعاملة
 async function updateSnapshotInTx(
-    tx: Parameters<Parameters<typeof prisma.$transaction>[0]>[0],
+    tx: typeof prisma,
     itemId: string,
     locationId: string,
     delta: number
