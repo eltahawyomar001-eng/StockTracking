@@ -43,10 +43,10 @@ export async function importExcelData(
         prisma.item.findMany(),
     ]);
 
-    categories.forEach((c) => categoryCache.set(c.name, c.id));
-    subcategories.forEach((s) => subcategoryCache.set(`${s.categoryId}:${s.name}`, s.id));
-    locations.forEach((l) => locationCache.set(l.name, l.id));
-    items.forEach((i) => itemCache.set(i.code, i.id));
+    categories.forEach((c: { name: string; id: string }) => categoryCache.set(c.name, c.id));
+    subcategories.forEach((s: { categoryId: string; name: string; id: string }) => subcategoryCache.set(`${s.categoryId}:${s.name}`, s.id));
+    locations.forEach((l: { name: string; id: string }) => locationCache.set(l.name, l.id));
+    items.forEach((i: { code: string; id: string }) => itemCache.set(i.code, i.id));
 
     for (const row of rows) {
         try {
