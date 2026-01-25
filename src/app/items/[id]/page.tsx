@@ -65,10 +65,10 @@ export default async function ItemDetailPage({ params }: PageProps) {
                     <GlassCard className="text-center px-8 py-4">
                         <p className="text-foreground/60 text-sm mb-1">الرصيد الإجمالي</p>
                         <p className={`text-4xl font-bold ${item.totalStock > 0
-                                ? 'text-green-400'
-                                : item.totalStock < 0
-                                    ? 'text-red-400'
-                                    : 'text-foreground/60'
+                            ? 'text-green-400'
+                            : item.totalStock < 0
+                                ? 'text-red-400'
+                                : 'text-foreground/60'
                             }`}>
                             {formatNumberArabic(item.totalStock)}
                         </p>
@@ -106,7 +106,7 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                 </div>
                             ) : (
                                 <div className="space-y-3">
-                                    {item.stockSnapshots.map((snapshot) => (
+                                    {item.stockSnapshots.map((snapshot: { id: string; onHand: number; location: { name: string } }) => (
                                         <div
                                             key={snapshot.id}
                                             className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-primary/10 transition-colors"
@@ -120,10 +120,10 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                                 </span>
                                             </div>
                                             <span className={`text-xl font-bold ${snapshot.onHand > 0
-                                                    ? 'text-green-400'
-                                                    : snapshot.onHand < 0
-                                                        ? 'text-red-400'
-                                                        : 'text-foreground/60'
+                                                ? 'text-green-400'
+                                                : snapshot.onHand < 0
+                                                    ? 'text-red-400'
+                                                    : 'text-foreground/60'
                                                 }`}>
                                                 {formatNumberArabic(snapshot.onHand)}
                                             </span>
@@ -158,7 +158,7 @@ export default async function ItemDetailPage({ params }: PageProps) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {item.movements.map((movement) => (
+                                            {item.movements.map((movement: { id: string; date: Date; type: 'IN' | 'OUT' | 'TRANSFER'; quantity: number; fromLocation?: { name: string } | null; toLocation?: { name: string } | null; note?: string | null }) => (
                                                 <tr
                                                     key={movement.id}
                                                     className="border-b border-white/5 hover:bg-white/5 transition-colors"
