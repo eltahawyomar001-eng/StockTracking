@@ -18,7 +18,7 @@ interface CreateMovementData {
 
 // إنشاء حركة مع تحديث الرصيد
 export async function createMovement(data: CreateMovementData) {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: typeof prisma) => {
         // التحقق من عدم التكرار
         if (data.sourceRowHash) {
             const existing = await tx.movement.findUnique({
@@ -85,7 +85,7 @@ export async function createMovement(data: CreateMovementData) {
 
 // تحديث رصيد الموقع
 async function updateStock(
-    tx: Parameters<Parameters<typeof prisma.$transaction>[0]>[0],
+    tx: typeof prisma,
     itemId: string,
     locationId: string,
     delta: number
